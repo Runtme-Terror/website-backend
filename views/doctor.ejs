@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SignUp and Login</title>
+	<link rel="stylesheet" type="text/css" href="/css/doctor.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body>
+
+<div class="container" id="container">
+<div class="form-container sign-up-container">
+
+<form action="">
+	<h1>Create Account</h1>
+	
+	<br>
+	<input type="text" name="registration_id" placeholder="Registration No.">
+	<input type="text" name="name" placeholder="Name">
+	<input type="number" name="phone_number" placeholder="Phone Number">	
+	<input type="email" name="email" placeholder="Email">
+	<input type="password" name="password" placeholder="Password">
+	<input type="password" name="confirm_password" placeholder="Confirm Password">
+	<button style="margin-top: 10px ;">Register Now</button>
+</form>
+</div>
+<div class="form-container sign-in-container">
+	<form action="#">
+		<h1>Login In</h1>
+		<div class="social-container">
+
+	</div>
+	
+	<input type="email" name="email" placeholder="Email">
+	<input type="password" name="password" placeholder="Password">
+	<a href="#">Forgot Your Password?</a>
+
+	<button>Sign In</button>
+	</form>
+</div>
+<div class="overlay-container">
+	<div class="overlay">
+		<div class="overlay-panel overlay-left">
+			<h1>Welcome back, Doc!</h1>
+			<br>
+			<p>
+			Already registered with us?</p><p>
+			Please sign in with your credentials by clicking here.</p>
+			<button class="ghost" id="signIn">Sign In</button>
+		</div>
+		<div class="overlay-panel overlay-right">
+			<h1> Register Now</h1>
+			<br>
+			<p> Don't have an account yet?</p>
+			<p>Get on-board in a jiffy and start your consultation with the patients instantly by clicking here.</p>
+			
+			<button class="ghost" id="signUp">Sign Up</button>
+		</div>
+	</div>
+</div>
+</div>
+
+<script type="text/javascript">
+	const signUpButton = document.getElementById('signUp');
+	const signInButton = document.getElementById('signIn');
+	const container = document.getElementById('container');
+
+	signUpButton.addEventListener('click', () => {
+		container.classList.add("right-panel-active");
+	});
+	signInButton.addEventListener('click', () => {
+		container.classList.remove("right-panel-active");
+	});
+</script>
+
+</body>
+</html>

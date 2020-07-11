@@ -47,10 +47,11 @@ app.get('/', (req, res) => {
     res.render('landing');
 });
 
-app.get('/register', (req, res) => {
-    res.render('register');
+app.get('/doctor', (req, res) => {
+    res.render('doctor');
 });
 
 app.get('/login', (req, res) => {
     res.render('login');
 });
+
