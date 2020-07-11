@@ -3,7 +3,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-const User = require('./model/user');
+const Doctor = require('./model/doctor');
 const passport = require('passport');
 const path = require('path');
 
@@ -51,7 +51,75 @@ app.get('/doctor', (req, res) => {
     res.render('doctor');
 });
 
-app.get('/login', (req, res) => {
-    res.render('login');
+app.get('/doctor/home', (req, res) => {
+    res.render('doctorhome');
 });
 
+app.post('/doctor/register', async(req, res) => {
+    const registration_id = req.body.registration_id;
+    const name = req.body.name;
+    const phone_number = req.body.phone_number;
+    const email = req.body.email;
+    const password = req.body.password;    
+
+    try {
+        const newDoctor = {
+            registration_id: registration_id,
+            name: name,
+            phone_number: phone_number,
+            email: email,
+            password: password
+            
+        };
+        doctor = await Doctor.create(newDoctor);            
+        res.redirect('/doctor');
+
+    } catch (error) {
+        console.log(error);
+        res.redirect('/doctor');
+    }
+});
+
+app.post('/doctor/login', async(req, res) => {
+    const email = req.body.email;
+    const password = req.body.password;    
+
+    const query = { email: email, password: password};
+
+    try {
+        let doctor = await Doctor.findOne(query);
+        console.log(doctor);
+
+        if(doctor){
+            req.login(email, () =>{
+                res.redirect('/doctor/home')
+            });
+        } else {
+            res.redirect('/doctor');
+        }
+
+
+    } catch (error) {
+        console.log(error);
+        res.redirect('/doctor');
+    }
+
+
+});
+
+
+app.get('/logout', (req, res) => {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/');
+});
+
+
+// Passport Serialize and Deserialize
+passport.serializeUser(function(email, done) {
+    done(null, email);
+  });
+  
+passport.deserializeUser(function(email, done) {
+    done(null, email);
+  });
