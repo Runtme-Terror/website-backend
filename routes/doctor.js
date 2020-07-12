@@ -25,7 +25,8 @@ router.post('/register', async(req, res) => {
             name: name,
             phone_number: phone_number,
             email: email,
-            password: password
+            password: password,
+            role: "doctor"
             
         };
         doctor = await Doctor.create(newDoctor);            
@@ -38,6 +39,9 @@ router.post('/register', async(req, res) => {
 });
 
 router.post('/login', async(req, res) => {
+
+    // console.log(req.body)
+
     const email = req.body.email;
     const password = req.body.password;    
 
@@ -77,7 +81,8 @@ router.get('/home', authenticationMiddleware(), (req, res) => {
 
 function authenticationMiddleware () {  
 	return (req, res, next) => {
-        if (req.isAuthenticated()) return next();        
+        console.log(req.isAuthenticated())
+        if (req.isAuthenticated() && req.user.role ==="doctor") return next();        
 	    res.redirect('/doctor');
 	}
 }

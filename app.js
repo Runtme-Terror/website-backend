@@ -7,15 +7,13 @@ const Doctor = require('./model/doctor');
 const passport = require('passport');
 const path = require('path');
 const doctorRoute = require('./routes/doctor');
+const patientRoute = require('./routes/patient');
 
 dotenv.config({path: './.env'});
 
 const app = express();
 
-const publicDirectory = path.join(__dirname, './public');         // Join path to public folder   
-app.use(express.static(publicDirectory));                         // Serve public files like CSS,Favicon
-app.use(express.urlencoded({extended: false}));                   // For parsing URL encoded bodies
-app.use(express.json());
+
 
 
 
@@ -37,15 +35,21 @@ app.use(session({
     secret: 'keyboard cat',
     resave: false,
     saveUninitialized: false,
-    store: new MongoStore({ mongooseConnection: mongoose.connection})
+    store: new MongoStore({ mongooseConnection: mongoose.connection}),
+    cookie: { secure: false } 
   }))
 
 
 app.use(passport.initialize());             // Initialize Passport 
 app.use(passport.session());
 
+const publicDirectory = path.join(__dirname, './public');         // Join path to public folder   
+app.use(express.static(publicDirectory));                         // Serve public files like CSS,Favicon
+app.use(express.urlencoded({extended: false}));                   // For parsing URL encoded bodies
+app.use(express.json());
 
 app.use('/doctor', doctorRoute);
+app.use('/patient', patientRoute);
 
 /////////////////////////////////////////////////////////////////////////////
 

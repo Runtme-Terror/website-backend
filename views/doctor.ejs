@@ -6,7 +6,7 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
-
+<h1 id="heading">Doctor Registration Page</h1>
 <div class="container" id="container">
 <div class="form-container sign-up-container">
 
@@ -31,7 +31,9 @@
 	</div>
 	
 	<input type="email" name="email" placeholder="Email" required>
-	<input type="password" name="password" placeholder="Password" required>
+    <input type="password" name="password" placeholder="Password" required>    
+    <input type="hidden" id="latitude" name="latitude" >
+    <input type="hidden" id="longitude" name="longitude" >
 	<a href="#">Forgot Your Password?</a>
 
 	<button>Sign In</button>
@@ -86,6 +88,26 @@
     password.onchange = validatePassword;
     confirm_password.onkeyup = validatePassword;
 </script>
+<script>
+    var lat = document.getElementById("latitude");
+    var long = document.getElementById("longitude");
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+        console.alert("Geolocation is not supported by this browser.");
+      }
+    }
+    
+    function showPosition(position) {
+      lat.value = position.coords.latitude; 
+      long.value = position.coords.longitude; 
+    }
+
+
+    getLocation()
+    showPosition()
+    </script>
 
 </body>
 </html>

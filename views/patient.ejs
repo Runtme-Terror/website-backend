@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>SignUp and Login</title>
+	<link rel="stylesheet" type="text/css" href="/css/patient.css">
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
+	<!-- <link href="https://fonts.googleapis.com/css?family=Indie+Flower|Lobster" rel="stylesheet"> -->
+</head>
+<body>
+	<i class="fa fa-user-md" aria-hidden="true"></i>
+<h1 id="heading">User Registration Page</h1>
+<div class="container" id="container">
+<div class="form-container sign-up-container">
+
+<form action="/patient/register" method="POST">
+	<h1>Create Account</h1>
+	<!-- <div class="social-container">
+		<a href="#" class="social"><i class="fa fa-facebook"></i></a>
+		<a href="#" class="social"><i class="fa fa-google"></i></a>
+		<a href="#" class="social"><i class="fa fa-linkedin"></i></a>
+	</div> -->
+	<!-- <span>or use your email for registration</span> -->
+
+	<input type="text" name="name" placeholder="Name" required>
+	<input type="number" name="phone_number" placeholder="Phone Number" required>
+	<input type="number" id="age" name="age" placeholder="Age" required>
+
+	<select name="gender" id="gender" required>
+		<option value="Gender" selected>Gender</option>
+  		<option value="Male">Male</option>
+  		<option value="Female">Female</option>
+  		<option value="Others">Others</option>
+	</select>
+	<!-- <button>Use Current Location</button> -->
+    <button type="button" onclick="getLocation()" >Use Current Location</button>
+    <input type="hidden" id="latitude" name="latitude"  required>
+    <input type="hidden" id="longitude" name="longitude" required >
+	<input type="email" name="email" placeholder="Email" required>
+	<input type="password" id="password" name="password" placeholder="Password" required>
+	<input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+	<button style="margin-top: 5px;">Register Now</button>
+</form>
+
+
+</div>
+<div class="form-container sign-in-container">
+	<form action="/patient/login" method="POST">
+		<h1>Login In</h1>
+		<div class="social-container">
+		<!-- <a href="#" class="social"><i class="fa fa-facebook"></i></a> -->
+		<!-- <a href="#" class="social"><i class="fa fa-google"></i></a> -->
+		<!-- <a href="#" class="social"><i class="fa fa-linkedin"></i></a> -->
+	</div>
+	<!-- <span>or use your account</span> -->
+	<input type="email" name="email" placeholder="Email">
+    <input type="password" name="password" placeholder="Password">
+    <input type="hidden" id="latitude2" name="latitude"  required>
+    <input type="hidden" id="longitude2" name="longitude" required >
+	<a href="#">Forgot Your Password?</a>
+
+	<button>Sign In</button>
+	</form>
+</div>
+<div class="overlay-container">
+	<div class="overlay">
+		<div class="overlay-panel overlay-left">
+			<h1>Welcome back!</h1>
+			<br>
+			<p>
+			Already registered with us?</p><p>
+			Please sign in with your credentials by clicking here.</p>
+			<button class="ghost" id="signIn">Sign In</button>
+		</div>
+		<div class="overlay-panel overlay-right">
+			<h1> Register Now</h1>
+			<br>
+			<p> Don't have an account yet?</p>
+			<p>Consult Right Specialists-24x7 from Top Hospitals by registering with us now.</p>
+
+			<button class="ghost" id="signUp">Sign Up</button>
+		</div>
+	</div>
+</div>
+</div>
+
+
+<!-- <footer>
+	<p>Made with love by </p>
+    www 🎲 Runtime_Terror 🎲 com
+  </footer> -->
+
+<script type="text/javascript">
+	const signUpButton = document.getElementById('signUp');
+	const signInButton = document.getElementById('signIn');
+	const container = document.getElementById('container');
+
+	signUpButton.addEventListener('click', () => {
+		container.classList.add("right-panel-active");
+	});
+	signInButton.addEventListener('click', () => {
+		container.classList.remove("right-panel-active");
+	});
+</script>
+<script>
+    var password = document.getElementById("password") , confirm_password = document.getElementById("confirm_password");
+
+function validatePassword(){
+if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords Don't Match");
+} else {
+    confirm_password.setCustomValidity('');
+}
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+<script>
+    var lat = document.getElementById("latitude");
+    var long = document.getElementById("longitude");
+    var lat2 = document.getElementById("latitude2");
+    var long2 = document.getElementById("longitude2");
+    function getLocation() {
+        
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else { 
+        console.alert("Geolocation is not supported by this browser.");
+      }
+    }
+    
+    function showPosition(position) {
+      lat.value = position.coords.latitude; 
+      long.value = position.coords.longitude; 
+      lat2.value = position.coords.latitude; 
+      long2.value = position.coords.longitude;
+    }
+
+    getLocation();
+    
+</script>
+
+</body>
+</html>

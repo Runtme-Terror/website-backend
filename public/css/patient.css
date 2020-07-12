@@ -45,8 +45,8 @@ a {
 
 button {
 	border-radius: 20px;
-	border: 1px solid #FF4B2B;
-	background-color: #FF4B2B;
+	border: 1px solid #ffaa23;
+	background-color: #ffaa23;
 	color: #FFFFFF;
 	font-size: 12px;
 	font-weight: bold;
@@ -80,13 +80,14 @@ form {
 	text-align: center;
 }
 
-input {
+select, input {
 	background-color: #eee;
 	border: none;
 	padding: 12px 15px;
-	margin: 4px 0;
+	margin: 2px 0;
 	width: 100%;
 }
+
 
 .container {
 	background-color: #fff;
@@ -160,9 +161,9 @@ input {
 }
 
 .overlay {
-	background: #FF416C;
-	background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-	background: linear-gradient(to right, #FF4B2B, #FF416C);
+	background:#ffaa23;
+	background: -webkit-linear-gradient(to right, #ed2a31,#ffaa23);
+	background: linear-gradient(to right, #ed2a31,#ffaa23);
 	background-repeat: no-repeat;
 	background-size: cover;
 	background-position: 0 0;
@@ -236,3 +237,8 @@ footer {
 	font-family: 'Indie Flower', cursive;
 
   }
+/*
+  :double-button
+  age
+  gender
+  location */
