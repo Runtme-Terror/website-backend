@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 const Doctor = require('./model/doctor');
+const Patient = require('./model/patient');
 const passport = require('passport');
 const path = require('path');
 const doctorRoute = require('./routes/doctor');
@@ -64,5 +65,11 @@ app.get('/test', (req, res) => {
 })
 
 
+app.get('/api', async(req, res) => {
 
+    const patients = await Patient.find({})
+
+    res.send(patients)
+
+} )
 
