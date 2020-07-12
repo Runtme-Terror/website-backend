@@ -206,13 +206,21 @@
               <th>Remarks</th>
               <th>Date</th>
               <th>Time</th>
+              <th>Meet</th>
             </tr>
           </thead>
           <tbody>
-
+            <tr>
+              <td>1</td>
+              <td>Danny Rand</td>
+              <td>Physician</td>
+              <td>12-07-2020</td>
+              <td>03:00 PM</td>
+              <td><a href="https://video-app-2304-dev.twil.io?passcode=9789812304">Link to Join Meet</a></td>
+            </tr>
 
             
-        <% locals.appointments.forEach(function(appointment, idx) { %>
+        <!-- <% locals.appointments.forEach(function(appointment, idx) { %>
           <tr>
             <td><%- idx +1 %></td>
             <td><%- appointment.patientname %></td>
@@ -221,7 +229,7 @@
             <td><%- appointment.time.toLocaleTimeString() %></td>
 
           </tr>
-         <% }); %>
+         <% }); %> -->
             
           </tbody>
         </table>
