@@ -27,12 +27,11 @@ a:hover {
 html,
 body {
   height: 100%;
-  /* background: url('C:\\Users\\hp\\Downloads\\hush-naidoo-yo01Z-9HQAw-unsplash.jpg'); */
+  background: url("/images/person-leaning-on-wooden-table-holding-white-tablet-3758759.jpg");
   background-color: #333;
-  /* background-position: center;
-  background-size: contain;
-  background-repeat: no-repeat; */
-
+  /* background-position: center; */
+  background-position: center;
+  background-size: 100% 100%;
 }
 
 body {
@@ -110,3 +109,4 @@ body {
 .mastfoot {
   color: rgba(255, 255, 255, .5);
 }
+
