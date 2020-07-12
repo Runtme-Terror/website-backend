@@ -45,6 +45,13 @@ router.get('/appointments', authenticationMiddleware(), async(req, res) => {
     })
 })
 
+router.get('/prescription', (req, res) => {
+    res.render('prescription')
+})
+
+router.post('/prescription', (req, res) => {
+    res.redirect('/doctor/home')
+})
 
 
 /////////////////////////////////////////////////////////////////////////
