@@ -59,7 +59,9 @@ app.get('/', (req, res) => {
 
 
 
-
+app.get('/test', (req, res) => {
+    res.render('doctorhome1')
+})
 
 
 

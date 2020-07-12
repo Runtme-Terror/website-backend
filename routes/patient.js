@@ -13,8 +13,12 @@ router.get('/', (req, res) => {
     res.render('patient');
 });
 
-router.get('/home',authenticationMiddleware(), (req, res) => {
-    res.render('patienthome');
+router.get('/home',authenticationMiddleware(), async(req, res) => {
+    const appointments = await Appointment.find({patientemail: req.user[0].email})
+    console.log(appointments)
+    res.render('patienthome', {
+        appointments: appointments
+    })
 });
 
 router.get('/viewdoctors',authenticationMiddleware(), async(req, res) => {
@@ -38,10 +42,11 @@ router.post('/bookappointment',authenticationMiddleware(), async(req, res) => {
 
     const doctorname = JSON.parse(req.body.doctor).name
     const doctoremail = JSON.parse(req.body.doctor).email
-    const patientname = req.user.name
-    const patientemail = req.user.email
+    const patientname = req.user[0].name
+    const patientemail = req.user[0].email
     const description = req.body.description
     const time = req.body.time
+    
 
     const newAppointment = {
         doctorname: doctorname, 
@@ -54,14 +59,14 @@ router.post('/bookappointment',authenticationMiddleware(), async(req, res) => {
 
     const appointment = await Appointment.create(newAppointment);
 
-    res.redirect('/patient/appointments');
+    res.redirect('/patient/home');
 
 
 });
 
 router.get('/appointments', authenticationMiddleware(), async(req, res) => {
 
-    const appointments = await Appointment.find({patientemail: req.user.email})
+    const appointments = await Appointment.find({patientemail: req.user[0].email})
     console.log(appointments)
     res.render('patientappointments', {
         appointments: appointments

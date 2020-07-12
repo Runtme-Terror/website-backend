@@ -26,8 +26,13 @@ router.get('/', (req, res) => {
 
 
 
-router.get('/home', authenticationMiddleware(), (req, res) => {
-    res.render('doctorhome');
+router.get('/home', authenticationMiddleware(), async(req, res) => {
+    const appointments = await Appointment.find({doctoremail: req.user[0].email})
+    console.log(appointments)
+    res.render('doctorhome', {
+        appointments: appointments
+    })
+    
 });
 
 
