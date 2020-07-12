@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    Book new appointment
+    <%- include('partials/patientnavbar') %>
+
+    <form action="/patient/bookappointment" method="post">
+    
+        <select name="doctor" id="doctor" required>
+            <option selected>Choose Doctor</option>
+            <% locals.doctors.forEach(function(doctor) { %>
+                 
+                <option value='{"email": "<%= doctor.email%>", "name": "<%= doctor.name %>" }'> <%= doctor.name %>  </option>
+           <% }); %>
+              
+        </select>
+        
+        <label for="description">Description:</label>
+        <input type="text" id="description" name="description" placeholder="Description" required>
+        
+        <label for="time">Appointment date and time:</label>
+        <input type="datetime-local" id="time" name="time" required>
+        
+        <button>Book Appointment</button>
+    
+    </form>
+    
+</body>
+</html>

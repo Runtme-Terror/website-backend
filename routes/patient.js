@@ -2,7 +2,8 @@ const express = require('express');
 const passport = require('passport');
 const path = require('path');
 const Patient = require('../model/patient');
-
+const Doctor = require('../model/doctor');
+const Appointment = require('../model/appointment');
 
 const router = express.Router();
 
@@ -11,6 +12,73 @@ router.get('/', (req, res) => {
     req.session.destroy();
     res.render('patient');
 });
+
+router.get('/home',authenticationMiddleware(), (req, res) => {
+    res.render('patienthome');
+});
+
+router.get('/viewdoctors',authenticationMiddleware(), async(req, res) => {
+
+    const doctors = await Doctor.find({})
+    res.render('patientviewdoctors' ,{
+        doctors: doctors
+    });
+});
+
+
+router.get('/bookappointment',authenticationMiddleware(), async(req, res) => {
+
+    const doctors = await Doctor.find({})
+    res.render('patientbookappointment' ,{
+        doctors: doctors
+    });
+});
+
+router.post('/bookappointment',authenticationMiddleware(), (req, res) => {
+
+    console.log(req.body)
+    const doctorname = JSON.parse(req.body.doctor).name
+    const doctoremail = JSON.parse(req.body.doctor).email
+    const patientname = req.user.name
+    const patientemail = req.user.email
+    const description = req.body.description
+    const time = req.body.time
+
+    
+
+
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 router.post('/register', async(req, res) => {
     console.log(req.body)
@@ -73,9 +141,6 @@ router.post('/login', async(req, res) => {
 
 });
 
-router.get('/home',authenticationMiddleware(), (req, res) => {
-    res.render('patienthome');
-});
 
 
 router.get('/logout', (req, res) => {

@@ -1,7 +1,9 @@
 const express = require('express');
 const passport = require('passport');
 const path = require('path');
+const Patient = require('../model/patient');
 const Doctor = require('../model/doctor');
+const Appointment = require('../model/appointment');
 
 
 const router = express.Router();

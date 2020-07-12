@@ -6,8 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    <%- include('partials/navbar') %>
-    Login Page
-    
+    Available Doctors
+    <%- include('partials/patientnavbar') %>
+
+
+    <% locals.doctors.forEach(function(doctor) { %>
+        <%= doctor.name %> <br>
+   <% }); %>
 </body>
 </html>
