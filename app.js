@@ -26,7 +26,7 @@ app.listen(PORT, () => {
     console.log(`Server started on http://localhost:${PORT}`);
 });
 
-mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true }, (req, res) => {
+mongoose.connect(process.env.MONGO_URI, { useUnifiedTopology: true, useNewUrlParser: true, useFindAndModify: false }, (req, res) => {
     console.log("Connected to MongoDB Atlas");
 });
 
@@ -62,11 +62,5 @@ app.get('/', (req, res) => {
 
 
 
-
-app.get('/logout', (req, res) => {
-    req.logout();
-    req.session.destroy();
-    res.redirect('/');
-});
 
 

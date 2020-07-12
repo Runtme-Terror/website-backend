@@ -40,18 +40,23 @@ router.post('/register', async(req, res) => {
 
 
 router.post('/login', async(req, res) => {
-    // console.log(req.body)
+    console.log(req.body)
 
     const email = req.body.email;
-    const password = req.body.password;    
+    const password = req.body.password;  
+    const latitude = req.body.latitude;
+    const longitude = req.body.longitude; 
 
     const query = { email: email, password: password};
     
     try {
         const patient = await Patient.findOne(query);
-        console.log(patient.id);
+        
 
         if(patient){
+
+            await Patient.updateOne(query, {latitude: latitude, longitude: longitude}, {upsert: true})
+
             req.login(email, () =>{
                 
                 res.redirect('/patient/home')
@@ -73,15 +78,17 @@ router.get('/home',authenticationMiddleware(), (req, res) => {
 });
 
 
+router.get('/logout', (req, res) => {
+    req.logout();
+    req.session.destroy();
+    res.redirect('/patient')
+})
+
 
 
 function authenticationMiddleware () {  
 	return (req, res, next) => {
-        // console.log(req.user[0])
-        // console.log(req.isAuthenticated())
-        if (req.isAuthenticated() && req.user[0].role === 'patient') return next();   
-        
-        
+        if (req.isAuthenticated() && req.user[0].role === 'patient') return next();       
 	    res.redirect('/patient');
 	}
 }
@@ -93,9 +100,6 @@ passport.serializeUser(function(email, done) {
   
 passport.deserializeUser( async(email, done) => {
 await Patient.find({email: email}, (err, user) =>  done(null, user));
-// console.log(email)
-// done(null, email);
-
 });
 
 module.exports = router;
