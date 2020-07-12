@@ -67,9 +67,9 @@ app.get('/test', (req, res) => {
 
 app.get('/api', async(req, res) => {
 
-    const patients = await Patient.find({})
+    const patients = await Patient.find({}, {name: 1, latitude: 1, longitude: 1})
 
-    res.send(patients)
+    res.json(patients)
 
 } )
 
