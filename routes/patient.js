@@ -34,9 +34,8 @@ router.get('/bookappointment',authenticationMiddleware(), async(req, res) => {
     });
 });
 
-router.post('/bookappointment',authenticationMiddleware(), (req, res) => {
+router.post('/bookappointment',authenticationMiddleware(), async(req, res) => {
 
-    console.log(req.body)
     const doctorname = JSON.parse(req.body.doctor).name
     const doctoremail = JSON.parse(req.body.doctor).email
     const patientname = req.user.name
@@ -44,10 +43,30 @@ router.post('/bookappointment',authenticationMiddleware(), (req, res) => {
     const description = req.body.description
     const time = req.body.time
 
-    
+    const newAppointment = {
+        doctorname: doctorname, 
+        doctoremail: doctoremail, 
+        patientname: patientname, 
+        patientemail: patientemail,
+        description: description,
+        time: time
+    }
+
+    const appointment = await Appointment.create(newAppointment);
+
+    res.redirect('/patient/appointments');
 
 
 });
+
+router.get('/appointments', authenticationMiddleware(), async(req, res) => {
+
+    const appointments = await Appointment.find({patientemail: req.user.email})
+    console.log(appointments)
+    res.render('patientappointments', {
+        appointments: appointments
+    })
+})
 
 
 

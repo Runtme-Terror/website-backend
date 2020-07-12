@@ -14,6 +14,35 @@ router.get('/', (req, res) => {
     res.render('doctor');
 });
 
+
+
+
+
+
+
+
+
+
+
+
+
+router.get('/home', authenticationMiddleware(), (req, res) => {
+    res.render('doctorhome');
+});
+
+
+router.get('/appointments', authenticationMiddleware(), async(req, res) => {
+
+    const appointments = await Appointment.find({doctoremail: req.user.email})
+    console.log(appointments)
+    res.render('doctorappointments', {
+        appointments: appointments
+    })
+})
+
+
+
+/////////////////////////////////////////////////////////////////////////
 router.post('/register', async(req, res) => {
     const registration_id = req.body.registration_id;
     const name = req.body.name;
@@ -70,10 +99,6 @@ router.post('/login', async(req, res) => {
 
 });
 
-
-router.get('/home', authenticationMiddleware(), (req, res) => {
-    res.render('doctorhome');
-});
 
 
 router.get('/logout', (req, res) => {

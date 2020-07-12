@@ -6,15 +6,12 @@
     <title>Document</title>
 </head>
 <body>
-    Doctor DashBoard
-    <br>
-    <%- include('partials/doctornavbar') %>
+    My appointments
+    <%- include('partials/patientnavbar') %>
 
-
-
-
-
-    
+    <% locals.appointments.forEach(function(appointment) { %>
+        <%= appointment %> <br>
+   <% }); %>
     
 </body>
 </html>
