@@ -34,7 +34,7 @@
   </head>
   <body>
     <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Doctor's Dashboard</a>
+  <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" href="#">Doximity</a>
   <button class="navbar-toggler position-absolute d-md-none collapsed" type="button" data-toggle="collapse" data-target="#sidebarMenu" aria-controls="sidebarMenu" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -211,21 +211,14 @@
           <tbody>
 
 
-            <tr>
-              <td>1</td>
-              <td>Murli Prasad Sharma</td>
-              <td>Chest Pains</td>
-              <td>12/07/2020</td>
-              <td>01:00 PM</td>
-
-            </tr>
+            
         <% locals.appointments.forEach(function(appointment, idx) { %>
           <tr>
             <td><%- idx +1 %></td>
             <td><%- appointment.patientname %></td>
             <td><%- appointment.description %></td>
-            <td><%- appointment.time %></td>
-            <td>01:00 PM</td>
+            <td><%- appointment.time.toDateString() %></td>
+            <td><%- appointment.time.toLocaleTimeString() %></td>
 
           </tr>
          <% }); %>
